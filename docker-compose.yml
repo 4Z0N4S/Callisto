@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  callisto:
+    build: .
+    container_name: callisto
+    restart: unless-stopped
+    env_file:
+      - ./default.env
+    volumes:
+      - /volume1/docker/callisto/CHZZK-VOD:/home/callisto/CHZZK-VOD
