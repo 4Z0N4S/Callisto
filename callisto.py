@@ -13,9 +13,17 @@ naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/l
 NID_AUT = os.getenv('NID_AUT', '')
 NID_SES = os.getenv('NID_SES', '')
 cookies = f"NID_AUT={NID_AUT}; NID_SES={NID_SES}"
+USER_AGENT =  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Whale/3.23.214.17 Safari/537.36"
+
+headers = {  
+            "User-Agent": USER_AGENT,
+            }
+
+if cookies:
+    headers['Cookie'] = cookies 
 
 def check_naver_status():
-    response = requests.get(naver_api_url)
+    response = requests.get(naver_api_url, headers=headers)
     if response.status_code == 200:
         return response.json().get('content', {}).get('status')
     else:
@@ -35,7 +43,7 @@ def check_stream():
         naver_status = check_naver_status()
         
         if naver_status == 'OPEN':
-            response = requests.get(naver_api_url)
+            response = response = requests.get(naver_api_url, headers=headers)
             title = response.json().get('content', {}).get('liveTitle')
             channel = response.json().get('content', {}).get('channel').get('channelName')
             print("")
