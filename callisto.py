@@ -55,7 +55,7 @@ def check_stream():
             
             while check_naver_status() == 'OPEN':
                 logger.info("Checking for close status")
-                time.sleep(60)
+                time.sleep(30)
         else:
             logger.info("OFFLINE! Checking again in 5 minutes.")
             time.sleep(300)
