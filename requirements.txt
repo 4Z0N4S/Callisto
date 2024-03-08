@@ -1,2 +1,2 @@
-streamlink==6.5.1
+streamlink==6.6.2
 requests==2.31.0
