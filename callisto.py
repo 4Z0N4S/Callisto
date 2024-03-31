@@ -33,7 +33,11 @@ def check_naver_status():
 def run_streamlink(channel_id):
     try:
         logger.info(f"치지직 라이브 녹화를 시작합니다!")
-        suffix = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+        response = requests.get(naver_api_url, headers=headers)
+        title = response.json().get('content', {}).get('liveTitle')
+        channel = response.json().get('content', {}).get('channel').get('channelName')
+        current_time = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+        suffix = f"{channel}_{title}_{current_time}"
         subprocess.call(['streamlink', '--ffmpeg-copyts', '--plugin-dirs', '/home/callisto/plugins', f'https://chzzk.naver.com/live/{channel_id}', 'best', '--chzzk-cookies', f'{cookies}', '--output', f'/home/callisto/CHZZK-VOD/{suffix}.mp4'])
     except Exception as e:
         logger.error(f"Streamlink 실행 중 오류 발생: {e}")
