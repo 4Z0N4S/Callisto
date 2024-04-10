@@ -4,14 +4,17 @@ import subprocess
 import datetime
 import logging
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger('streamlink_logger')
 logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(asctime)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
-channel_id = os.getenv('CHANNEL_ID', '')
+channel_id = os.getenv('CHANNEL_ID')
 naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/live-detail'
-NID_AUT = os.getenv('NID_AUT', '')
-NID_SES = os.getenv('NID_SES', '')
+NID_AUT = os.getenv('NID_AUT')
+NID_SES = os.getenv('NID_SES')
 cookies = f"NID_AUT={NID_AUT}; NID_SES={NID_SES}"
 USER_AGENT =  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Whale/3.23.214.17 Safari/537.36"
 
@@ -44,8 +47,7 @@ def run_streamlink(channel_id):
 
 def check_stream():
     while True:
-        naver_status = check_naver_status()
-        
+        naver_status = check_naver_status()     
         if naver_status == 'OPEN':
             response = response = requests.get(naver_api_url, headers=headers)
             title = response.json().get('content', {}).get('liveTitle')
@@ -56,7 +58,6 @@ def check_stream():
             logger.info(f'https://chzzk.naver.com/live/{channel_id}')
             print("")
             run_streamlink(channel_id)
-            
             while check_naver_status() == 'OPEN':
                 logger.info("Checking for close status")
                 time.sleep(30)

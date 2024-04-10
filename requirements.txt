@@ -1,2 +1,3 @@
 streamlink==6.6.2
 requests==2.31.0
+python-dotenv

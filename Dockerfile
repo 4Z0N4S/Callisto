@@ -8,6 +8,7 @@ RUN mkdir /home/callisto && \
 
 COPY requirements.txt /home/callisto
 COPY callisto.py /home/callisto
+COPY default.env /home/callisto
 COPY /plugins/chzzk.py /home/callisto/plugins
 
 RUN apt-get update && \
