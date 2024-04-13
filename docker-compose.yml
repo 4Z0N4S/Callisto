@@ -1,8 +1,8 @@
 version: "3.3"
 services:
   callisto:
-    build: .
     container_name: callisto
+    image: yck1406/callisto:latest
     restart: unless-stopped
     env_file:
       - ./default.env
