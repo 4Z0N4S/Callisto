@@ -40,7 +40,7 @@ def run_streamlink(channel_id):
         title = response.json().get('content', {}).get('liveTitle')
         channel = response.json().get('content', {}).get('channel').get('channelName')
         current_time = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
-        suffix = f"{channel}_{title}_{current_time}"
+        suffix = f"{current_time}_{channel}_{title}"
         subprocess.call(['streamlink', '--ffmpeg-copyts', '--plugin-dirs', '/home/callisto/plugins', f'https://chzzk.naver.com/live/{channel_id}', 'best', '--chzzk-cookies', f'{cookies}', '--output', f'/home/callisto/CHZZK-VOD/{suffix}.mp4'])
     except Exception as e:
         logger.error(f"Streamlink 실행 중 오류 발생: {e}")
