@@ -16,7 +16,7 @@ naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/l
 NID_AUT = os.getenv('NID_AUT')
 NID_SES = os.getenv('NID_SES')
 cookies = f"NID_AUT={NID_AUT}; NID_SES={NID_SES}"
-USER_AGENT =  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Whale/3.23.214.17 Safari/537.36"
+USER_AGENT =  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 headers = {  
             "User-Agent": USER_AGENT,
