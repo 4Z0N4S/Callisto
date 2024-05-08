@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 ) 
 class Chzzk(Plugin): 
     API_URL = "https://api.chzzk.naver.com/service/v2/channels/{}/live-detail"
-    USER_AGENT =  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Whale/3.23.214.17 Safari/537.36"
+    USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     def _get_streams(self):  
         cookies = self.get_option("cookies")
         channel = self.match['channel']
