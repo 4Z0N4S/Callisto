@@ -6,8 +6,7 @@
 녹화 중에는 1분마다 방송 상태를 확인하여 자동으로 녹화를 중단합니다.
 
 ## **Prerequisites**
-- Streamlink
-- [CHZZK Streamlink Plugin](https://github.com/park-onezero/streamlink-plugin-chzzk)
+- Streamlink 6.7.4
 - FFmpeg
 - Python 3.12.2
 

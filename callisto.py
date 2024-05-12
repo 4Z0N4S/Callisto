@@ -15,15 +15,11 @@ channel_id = os.getenv('CHANNEL_ID')
 naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/live-detail'
 NID_AUT = os.getenv('NID_AUT')
 NID_SES = os.getenv('NID_SES')
-cookies = f"NID_AUT={NID_AUT}; NID_SES={NID_SES}"
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 headers = {  
             "User-Agent": USER_AGENT,
             }
-
-if cookies:
-    headers['Cookie'] = cookies 
 
 def check_naver_status():
     response = requests.get(naver_api_url, headers=headers)
@@ -41,7 +37,7 @@ def run_streamlink(channel_id):
         channel = response.json().get('content', {}).get('channel').get('channelName')
         current_time = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
         suffix = f"{current_time}_{channel}_{title}"
-        subprocess.call(['streamlink', '--ffmpeg-copyts', '--plugin-dirs', '/home/callisto/plugins', f'https://chzzk.naver.com/live/{channel_id}', 'best', '--chzzk-cookies', f'{cookies}', '--output', f'/home/callisto/CHZZK-VOD/{suffix}.mp4'])
+        subprocess.call(['streamlink', '--ffmpeg-copyts', f'https://chzzk.naver.com/live/{channel_id}', 'best', '--http-cookies', f'{NID_AUT}', '--http-cookies', f'{NID_SES}', '--output', f'/home/callisto/CHZZK-VOD/{suffix}.mp4'])
     except Exception as e:
         logger.error(f"Streamlink 실행 중 오류 발생: {e}")
 

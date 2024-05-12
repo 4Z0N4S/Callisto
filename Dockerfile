@@ -3,13 +3,11 @@ FROM python:3.12.2-slim-bookworm
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir /home/callisto && \
-    mkdir /home/callisto/CHZZK-VOD && \
-    mkdir /home/callisto/plugins
+    mkdir /home/callisto/CHZZK-VOD
 
 COPY requirements.txt /home/callisto
 COPY callisto.py /home/callisto
 COPY default.env /home/callisto
-COPY /plugins/chzzk.py /home/callisto/plugins
 
 RUN apt-get update && \
     apt-get install -y tzdata && \
