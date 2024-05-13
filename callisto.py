@@ -23,7 +23,7 @@ headers = {
 
 def check_naver_status():
     response = requests.get(naver_api_url, headers=headers)
-    if response.status_code == 200:
+    if response.status_code == 200 and response.json().get('content', {}) != None:
         return response.json().get('content', {}).get('status')
     else:
         logger.error(f"Error Status code: {response.status_code} Response: {response.text}")
