@@ -1,3 +1,4 @@
+import re
 import requests
 import time
 import subprocess
@@ -34,9 +35,10 @@ def run_streamlink(channel_id):
         logger.info(f"치지직 라이브 녹화를 시작합니다!")
         response = requests.get(naver_api_url, headers=headers)
         title = response.json().get('content', {}).get('liveTitle')
+        cleaned_live_title = special_chars_remover.sub('', title.rstrip())
         channel = response.json().get('content', {}).get('channel').get('channelName')
         current_time = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
-        suffix = f"{current_time}_{channel}_{title}"
+        suffix = f"{current_time}_{channel}_{cleaned_live_title}"
         subprocess.call(['streamlink', '--ffmpeg-copyts', f'https://chzzk.naver.com/live/{channel_id}', 'best', '--http-cookie', f'NID_AUT={NID_AUT}', '--http-cookie', f'NID_SES={NID_SES}', '--output', f'/home/callisto/CHZZK-VOD/{suffix}.mp4'])
     except Exception as e:
         logger.error(f"Streamlink 실행 중 오류 발생: {e}")
