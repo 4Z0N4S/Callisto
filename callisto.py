@@ -12,6 +12,8 @@ load_dotenv()
 logger = logging.getLogger('streamlink_logger')
 logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(asctime)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
+special_chars_remover = re.compile(r'[\\/:*?\"<>|]')
+
 channel_id = os.getenv('CHANNEL_ID')
 naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/live-detail'
 NID_AUT = os.getenv('NID_AUT')
