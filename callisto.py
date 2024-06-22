@@ -58,7 +58,7 @@ def check_stream():
             run_streamlink(channel_id)
             while check_naver_status() == 'OPEN':
                 logger.info("Checking for close status")
-                time.sleep(60)
+                time.sleep(10)
         else:
             logger.info("OFFLINE! Checking again in 1 minute.")
             time.sleep(60)
