@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(asctime)s %(me
 special_chars_remover = re.compile(r'[\\/:*?\"<>|]')
 
 channel_id = os.getenv('CHANNEL_ID')
-naver_api_url = f'https://api.chzzk.naver.com/service/v2/channels/{channel_id}/live-detail'
+naver_api_url = f'https://api.chzzk.naver.com/service/v3/channels/{channel_id}/live-detail'
 NID_AUT = os.getenv('NID_AUT')
 NID_SES = os.getenv('NID_SES')
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
