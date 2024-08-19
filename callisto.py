@@ -49,7 +49,7 @@ def check_stream():
     while True:
         naver_status = check_naver_status()     
         if naver_status == 'OPEN':
-            response = response = requests.get(naver_api_url, headers=headers)
+            response = requests.get(naver_api_url, headers=headers)
             title = response.json().get('content', {}).get('liveTitle')
             channel = response.json().get('content', {}).get('channel').get('channelName')
             logger.info(f'[치지직 라이브] {channel}님의 방송이 시작되었습니다!')
