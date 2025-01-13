@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 logger = logging.getLogger('streamlink_logger')
-logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(asctime)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+logging.basicConfig(level=logging.INFO, format="[%(asctime)s] [%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 NID_AUT = os.getenv('NID_AUT')
@@ -55,7 +55,7 @@ def check_stream():
             response = requests.get(CHZZK_API, headers=headers)
             title = response.json().get('content', {}).get('liveTitle')
             channel = response.json().get('content', {}).get('channel').get('channelName')
-            logger.info(f'[치지직 라이브] {channel}님의 방송이 시작되었습니다!')
+            logger.info(f'{channel}님의 방송이 시작되었습니다!')
             logger.info(f'방송 제목: {title}')
             logger.info(f'https://chzzk.naver.com/live/{CHANNEL_ID}')
             run_streamlink(CHANNEL_ID)
