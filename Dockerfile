@@ -7,6 +7,7 @@ RUN mkdir /home/callisto && \
 
 COPY requirements.txt /home/callisto
 COPY callisto.py /home/callisto
+COPY callisto_ffmpeg.py /home/callisto
 COPY default.env /home/callisto
 
 RUN apt-get update && \
@@ -14,5 +15,3 @@ RUN apt-get update && \
     apt-get install -y ffmpeg && \
     ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
     pip3 install -r /home/callisto/requirements.txt
-
-CMD ["python3", "/home/callisto/callisto.py"]
